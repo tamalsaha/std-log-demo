@@ -3,12 +3,13 @@ package main
 import (
 	"flag"
 	"fmt"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"log"
-	"k8s.io/client-go/kubernetes"
-	"k8s.io/client-go/tools/clientcmd"
+
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/client-go/kubernetes"
+	"k8s.io/client-go/tools/clientcmd"
 )
 
 func NewRootCmd() *cobra.Command {
@@ -54,9 +55,8 @@ func NewCmdCheck() *cobra.Command {
 				log.Fatalln(err)
 			}
 			for _, node := range nodes.Items {
-				fmt.Println("fmt.Println ---------------")
-				log.Println("log.Println -------------------")
-				log.Fatalln("log.Fatalln -------------------")
+				fmt.Println("log.Println_____")
+				log.Println(node.Name)
 			}
 		},
 	}
