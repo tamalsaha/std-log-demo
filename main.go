@@ -7,9 +7,6 @@ import (
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	"k8s.io/client-go/kubernetes"
-	"k8s.io/client-go/tools/clientcmd"
 )
 
 func NewRootCmd() *cobra.Command {
@@ -36,32 +33,15 @@ func NewRootCmd() *cobra.Command {
 }
 
 func NewCmdCheck() *cobra.Command {
-	var (
-		masterURL      string
-		kubeconfigFile string
-	)
 	cmd := &cobra.Command{
 		Use:               "check",
 		Short:             "Check restic backup",
 		DisableAutoGenTag: true,
 		Run: func(cmd *cobra.Command, args []string) {
-			config, err := clientcmd.BuildConfigFromFlags(masterURL, kubeconfigFile)
-			if err != nil {
-				log.Fatalln(err)
-			}
-			client := kubernetes.NewForConfigOrDie(config)
-			nodes, err := client.CoreV1().Nodes().List(metav1.ListOptions{})
-			if err != nil {
-				log.Fatalln(err)
-			}
-			for _, node := range nodes.Items {
-				fmt.Println("log.Println_____")
-				log.Println(node.Name)
-			}
+			fmt.Println("log.Println_____")
+			log.Println("node.Name")
 		},
 	}
-	cmd.Flags().StringVar(&masterURL, "master", masterURL, "The address of the Kubernetes API server (overrides any value in kubeconfig)")
-	cmd.Flags().StringVar(&kubeconfigFile, "kubeconfig", kubeconfigFile, "Path to kubeconfig file with authorization information (the master location is set by the master flag).")
 	return cmd
 }
 
