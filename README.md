@@ -8,6 +8,7 @@
 - https://github.com/tamalsaha/ac-log-demo
 
 ```console
+$ glide up -v
 $ go install -v
 
 $ std-log-demo check -h
